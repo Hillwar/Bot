@@ -28,18 +28,23 @@ bot.command("start", async (ctx) => {
 bot.on("message", () => {});
 
 // Запуск бота
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production' && process.env.DOMAIN) {
   // Запуск в режиме webhook для Railway
   const PORT = process.env.PORT || 3000;
   bot.launch({
     webhook: {
       domain: process.env.DOMAIN,
-      port: Number(PORT)
+      port: Number(PORT),
+      hookPath: '/webhook'
     }
+  }).then(() => {
+    console.log('Bot started in webhook mode');
   });
 } else {
   // Запуск в режиме long polling для разработки
-  bot.launch();
+  bot.launch().then(() => {
+    console.log('Bot started in polling mode');
+  });
 }
 
 // Включаем graceful shutdown
