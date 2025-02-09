@@ -1,6 +1,6 @@
 import { Telegraf } from 'telegraf';
 import dotenv from 'dotenv';
-import express from 'express';
+import express, { Request, Response } from 'express';
 
 dotenv.config();
 
@@ -8,7 +8,7 @@ const bot = new Telegraf(process.env.BOT_TOKEN || "");
 const app = express();
 
 // Добавляем обработчик для healthcheck
-app.get('/', (req, res) => {
+app.get('/', (req: Request, res: Response) => {
   console.log('Health check requested');
   res.status(200).send('OK');
 });
@@ -37,7 +37,7 @@ bot.on("message", () => {});
 
 // Запуск бота
 if (process.env.NODE_ENV === 'production' && process.env.DOMAIN) {
-  const PORT = process.env.PORT || 3000;
+  const PORT = Number(process.env.PORT) || 3000;
   
   // Настраиваем webhook
   app.use(bot.webhookCallback('/webhook'));

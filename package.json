@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node dist/index.js",
-    "dev": "nodemon src/index.ts",
+    "dev": "ts-node src/index.ts",
     "build": "tsc",
     "lint": "eslint src/**/*.ts"
   },
@@ -19,7 +19,6 @@
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
     "eslint": "^8",
-    "nodemon": "^3.0.3",
     "ts-node": "^10.9.2",
     "typescript": "^5"
   },
