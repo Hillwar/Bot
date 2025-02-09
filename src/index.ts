@@ -13,12 +13,9 @@ app.get('/', (req: Request, res: Response) => {
   res.status(200).send('OK');
 });
 
-// Добавим обработчик для проверки работоспособности
-bot.command("ping", (ctx) => ctx.reply("pong"));
-
 // Обработчик команды /start
 bot.command("start", async (ctx) => {
-  await ctx.reply("Добро пожаловать! Нажмите кнопку, чтобы открыть приложение.", {
+  await ctx.reply("Приветствую тебя, смельчак! Осмелишься ли ты погрузиться в таинственный мир лагеря? Нажми кнопку, если готов узнать все его секреты...", {
     reply_markup: {
       inline_keyboard: [[
         {
@@ -27,13 +24,16 @@ bot.command("start", async (ctx) => {
             url: process.env.WEBAPP_URL || "https://blackcommunar.vercel.app"
           }
         }
-      ]]
+      ]],
+      resize_keyboard: true,
+      one_time_keyboard: true
     }
   });
 });
 
-// Игнорируем все остальные сообщения
+// Игнорируем все сообщения и команды
 bot.on("message", () => {});
+bot.on("callback_query", () => {});
 
 // Запуск бота
 if (process.env.NODE_ENV === 'production' && process.env.DOMAIN) {
