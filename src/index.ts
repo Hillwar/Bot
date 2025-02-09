@@ -19,7 +19,7 @@ bot.command("start", async (ctx) => {
     reply_markup: {
       inline_keyboard: [[
         {
-          text: "▢ Launch App",
+          text: "🕯️ Войти в мир лагеря 🕯️",
           web_app: { 
             url: process.env.WEBAPP_URL || "https://blackcommunar.vercel.app"
           }
